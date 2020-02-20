@@ -106,9 +106,10 @@ function profile(user) {
         newUserInfo.appendChild(newUserFollowing);
         newUserInfo.appendChild(newUserBio);
         newUserInfo.appendChild(newUserContriGraph);
-    
+
     newUser.appendChild(newUserImg);
     newUser.appendChild(newUserInfo);
+
 
     return newUser;
 }
