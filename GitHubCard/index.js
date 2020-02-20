@@ -24,7 +24,7 @@
           user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = ['tetondan', 'dustinmyers', 'justsml', 'luishrd', 'bigknell'];
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -53,3 +53,79 @@ const followersArray = [];
   luishrd
   bigknell
 */
+
+
+function profile(user) {
+    const newUser = document.createElement('div');
+    newUser.classList.add('card');
+    
+    const newUserImg = document.createElement('img');
+    newUserImg.setAttribute('src', user.avatar_url);
+
+    const newUserInfo = document.createElement('div');
+    newUserInfo.classList.add('card-info');
+
+        const newUserName = document.createElement('h3');
+        newUserName.classList.add('name');
+        newUserName.textContent = user.name;
+
+        const newUserUname = document.createElement('p');
+        newUserUname.classList.add('username');
+        newUserName.textContent = user.login;
+
+        const newUserLocation = document.createElement('p');
+        newUserLocation.textContent = 'Location: ' + user.location;
+
+        const newUserProfile = document.createElement('p');
+            const newUserProfileLink = document.createElement('a');
+            newUserProfileLink.setAttribute('target', '_blank');
+            newUserProfileLink.setAttribute('href', user.html_url);
+            newUserProfileLink.textContent = user.html_url;
+            
+        newUserProfile.textContent = 'Profile:';
+        newUserProfile.appendChild(newUserProfileLink);
+
+        const newUserFollowers = document.createElement('p');
+        newUserFollowers.textContent = 'Followers: ' + user.followers;
+
+        const newUserFollowing = document.createElement('p');
+        newUserFollowing.textContent = 'Following: ' + user.following;
+
+        const newUserBio = document.createElement('p');
+        newUserBio.textContent = 'Bio: ' + user.bio;
+
+        newUserInfo.appendChild(newUserName);
+        newUserInfo.appendChild(newUserUname);
+        newUserInfo.appendChild(newUserLocation);
+        newUserInfo.appendChild(newUserProfile);
+        newUserInfo.appendChild(newUserFollowers);
+        newUserInfo.appendChild(newUserFollowing);
+        newUserInfo.appendChild(newUserBio);
+    
+    newUser.appendChild(newUserImg);
+    newUser.appendChild(newUserInfo);
+
+    return newUser;
+}
+  
+const container = document.querySelector('.cards');
+
+axios.get('https://api.github.com/users/joandong2')
+.then((response) => { 
+    console.log(response.data);
+    container.append(profile(response.data));
+})
+.catch((err) => { 
+    console.log(err);
+});
+
+followersArray.forEach((follower) => {
+    axios.get(`https://api.github.com/users/${follower}`)
+    .then((response) => { 
+        //console.log(response.data);
+        container.append(profile(response.data));
+    })
+    .catch((err) => { 
+        console.log(err);
+    })
+});
