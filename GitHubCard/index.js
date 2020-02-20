@@ -94,6 +94,10 @@ function profile(user) {
         const newUserBio = document.createElement('p');
         newUserBio.textContent = 'Bio: ' + user.bio;
 
+        const newUserContriGraph = document.createElement('img');
+        newUserContriGraph.classList.add('contri-graph');
+        newUserContriGraph.setAttribute('src', `http://ghchart.rshah.org/${user.login}`);
+    
         newUserInfo.appendChild(newUserName);
         newUserInfo.appendChild(newUserUname);
         newUserInfo.appendChild(newUserLocation);
@@ -101,6 +105,7 @@ function profile(user) {
         newUserInfo.appendChild(newUserFollowers);
         newUserInfo.appendChild(newUserFollowing);
         newUserInfo.appendChild(newUserBio);
+        newUserInfo.appendChild(newUserContriGraph);
     
     newUser.appendChild(newUserImg);
     newUser.appendChild(newUserInfo);
