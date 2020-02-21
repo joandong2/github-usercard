@@ -103,7 +103,7 @@ body {
 
 .card img {
   width: 150px;
-  height: 150px;
+  /* height: 150px; */
   border-radius: 3px;
   margin-right: 20px;
 }
